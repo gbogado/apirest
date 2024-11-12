@@ -8,7 +8,7 @@ function AlbumList() {
   const [singleAlbum, setSingleAlbum] = useState(null);
 
   useEffect(() => {
-    fetch("/albums", { method: "GET" })
+    fetch("http://backend:8080/albums", { method: "GET" })
       .then((response) => response.json())
       .then((data) => setAlbums(data))
       .catch((error) => console.log("Fetch error:", error));
