@@ -1,0 +1,20 @@
+# backend/Dockerfile
+FROM golang:1.19-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the source code into the container
+COPY . .
+
+# Initialize Go module, download dependencies, and build the application
+RUN go mod init backend || true && \
+    go mod tidy && \
+    go build -o main .
+
+# Expose port 8080
+EXPOSE 8080
+
+# Run the executable
+CMD ["./main"]
+

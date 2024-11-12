@@ -1,0 +1,29 @@
+# Use an official Node.js runtime as a parent image
+FROM node:18-alpine
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the package.json and package-lock.json first
+# This helps to leverage Docker cache for installing dependencies
+COPY package*.json ./
+
+# Install the app dependencies
+RUN npm install
+
+# Copy the rest of the application files into the container
+COPY . .
+
+# Build the app for production
+RUN npm run build
+
+# Use a lightweight web server to serve the app
+# You can use Nginx or serve for simplicity
+RUN npm install -g serve
+
+# Expose the port that the app will run on
+EXPOSE 3000
+
+# Start the app using `serve` to serve the build
+CMD ["serve", "-s", "build", "-l", "3000"]
+
