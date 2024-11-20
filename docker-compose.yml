@@ -11,10 +11,13 @@ services:
   frontend:
     build:
       context: ./frontend
+      args:
+        - API_END_POINT=${API_END_POINT}
     ports:
       - "3000:3000"
     networks:
       - app-network
+    env_file: .env
 
 networks:
   app-network:

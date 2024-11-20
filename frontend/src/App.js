@@ -8,7 +8,7 @@ function AlbumList() {
   const [singleAlbum, setSingleAlbum] = useState(null);
 
   useEffect(() => {
-    fetch("http://backend:8080/albums", { method: "GET" })
+    fetch("__API_END_POINT__/albums", { method: "GET" })
       .then((response) => response.json())
       .then((data) => setAlbums(data))
       .catch((error) => console.log("Fetch error:", error));
@@ -17,7 +17,7 @@ function AlbumList() {
   // Handle form submission for adding a new album
   const handleAddAlbum = (e) => {
     e.preventDefault();
-    fetch("http://backend:8080/albums", {
+    fetch("__API_END_POINT__/albums", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -39,7 +39,7 @@ function AlbumList() {
   // Handle fetching a single album by ID
   const handleGetAlbumById = (e) => {
     e.preventDefault();
-    fetch(`http://backend:8080/albums/${albumId}`, { method: "GET" })
+    fetch(`__API_END_POINT__/albums/${albumId}`, { method: "GET" })
       .then((response) => response.json())
       .then((album) => setSingleAlbum(album))
       .catch((error) => console.log("Error fetching album:", error));
